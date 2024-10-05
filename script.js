@@ -21,7 +21,12 @@ jQuery(function () {
         // Change the form's page-ID field on submit
         $form.submit(function () {
             // Build the new page ID and save in hidden form field
-            var id = $ns.val().replace('@INPUT@', $title.val());
+            let id = $ns.val();
+            if (id.includes("@INPUT@")) {
+                id = id.replaceAll('@INPUT@', $title.val());
+            } else {
+                id += ":" + $title.val();
+            }
             $id.val(id);
 
             // Clean up the form vars, just to make the resultant URL a bit nicer
